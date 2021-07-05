@@ -12,6 +12,14 @@ namespace Hospital_onco.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
+        public DbSet<Investigation> Investigations { get; set; }
+
+        public DbSet<Doctor> Doctors { get; set; }
+
+        public DbSet<ScheduledInvestigation> ScheduledInvestigations { get; set; }
+
+        public DbSet<Appointment> Appointments { get; set; }
+
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)

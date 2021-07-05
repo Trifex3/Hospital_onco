@@ -10,7 +10,7 @@ export function getBaseUrl() {
 
 export function getApiUrl() {
   return '/api/';
-
+}
   const providers = [
     { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
     { provide: 'API_URL', useFactory: getApiUrl, deps: [] }
@@ -22,4 +22,4 @@ export function getApiUrl() {
 
   platformBrowserDynamic(providers).bootstrapModule(AppModule)
     .catch(err => console.log(err));
-}
+

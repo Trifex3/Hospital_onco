@@ -4,14 +4,16 @@ using Hospital_onco.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hospital_onco.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210705210308_AddScheduleInvestigation")]
+    partial class AddScheduleInvestigation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,28 +99,6 @@ namespace Hospital_onco.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("Hospital_onco.Models.Appointment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ScheduledInvestigationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ScheduledInvestigationId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("Hospital_onco.Models.Doctor", b =>
@@ -451,23 +431,6 @@ namespace Hospital_onco.Migrations
                         .HasForeignKey("InvestigationsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Hospital_onco.Models.Appointment", b =>
-                {
-                    b.HasOne("Hospital_onco.Models.ScheduledInvestigation", "ScheduledInvestigation")
-                        .WithMany()
-                        .HasForeignKey("ScheduledInvestigationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hospital_onco.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("ScheduledInvestigation");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Hospital_onco.Models.ScheduledInvestigation", b =>

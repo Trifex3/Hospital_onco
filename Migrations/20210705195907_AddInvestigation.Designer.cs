@@ -4,35 +4,22 @@ using Hospital_onco.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hospital_onco.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210705195907_AddInvestigation")]
+    partial class AddInvestigation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("DoctorInvestigation", b =>
-                {
-                    b.Property<int>("DoctorsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("InvestigationsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DoctorsId", "InvestigationsId");
-
-                    b.HasIndex("InvestigationsId");
-
-                    b.ToTable("DoctorInvestigation");
-                });
 
             modelBuilder.Entity("Hospital_onco.Models.ApplicationUser", b =>
                 {
@@ -99,49 +86,6 @@ namespace Hospital_onco.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Hospital_onco.Models.Appointment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ScheduledInvestigationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ScheduledInvestigationId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Appointments");
-                });
-
-            modelBuilder.Entity("Hospital_onco.Models.Doctor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Doctors");
-                });
-
             modelBuilder.Entity("Hospital_onco.Models.Investigation", b =>
                 {
                     b.Property<int>("Id")
@@ -164,40 +108,6 @@ namespace Hospital_onco.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Investigations");
-                });
-
-            modelBuilder.Entity("Hospital_onco.Models.ScheduledInvestigation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("InvestigationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("InvestigationId");
-
-                    b.ToTable("ScheduledInvestigations");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
@@ -436,57 +346,6 @@ namespace Hospital_onco.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("DoctorInvestigation", b =>
-                {
-                    b.HasOne("Hospital_onco.Models.Doctor", null)
-                        .WithMany()
-                        .HasForeignKey("DoctorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hospital_onco.Models.Investigation", null)
-                        .WithMany()
-                        .HasForeignKey("InvestigationsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Hospital_onco.Models.Appointment", b =>
-                {
-                    b.HasOne("Hospital_onco.Models.ScheduledInvestigation", "ScheduledInvestigation")
-                        .WithMany()
-                        .HasForeignKey("ScheduledInvestigationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hospital_onco.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("ScheduledInvestigation");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Hospital_onco.Models.ScheduledInvestigation", b =>
-                {
-                    b.HasOne("Hospital_onco.Models.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hospital_onco.Models.Investigation", "Investigation")
-                        .WithMany()
-                        .HasForeignKey("InvestigationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Investigation");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
