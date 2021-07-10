@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-sm-2">
+    <app-sidebar-nav-menu></app-sidebar-nav-menu>
+  </div>
+
+  <div class="col-sm-10">
+    <!--<h1 id="tableLabel">Statistics</h1>-->
+    <hr>
+    <h2>Overview of next week's calendar</h2>
+    <br>
+    <table class='table table-hover' aria-labelledby="tableLabel" *ngIf="bookedScheduledInvestigationsStats">
+      <thead>
+        <tr>
+          <th>Investigation </th>
+          <th>Doctor</th>
+          <!--<th>Price</th>-->
+          <th>Remaining Spots</th>
+          <th>Appointment Spots</th>
+          <th>Interval</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let investigation of bookedScheduledInvestigationsStats">
+          <td> {{investigation.investigationName}} </td>
+          <td> {{investigation.doctorName}} </td>
+          <!--<td> {{investigation.price}} </td>-->
+          <td> {{investigation.remainingSpots}} </td>
+          <td> {{investigation.appointmentSpots}} </td>
+          <td> {{investigation.startTime |  date:'longDate' }} {{investigation.startTime |  date:'HH:mm' }} - {{ investigation.endTime |  date:'HH:mm' }} </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -13,6 +13,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Angular.UI.Bootstrap" Version="2.5.0" />
+    <PackageReference Include="AngularJS.Animate" Version="1.8.2" />
+    <PackageReference Include="AngularJS.Core" Version="1.8.2" />
+    <PackageReference Include="AngularJS.Route" Version="1.8.2" />
+    <PackageReference Include="AngularJS.Sanitize" Version="1.8.2" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="bootstrap" Version="5.0.2" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.6" />
@@ -26,9 +35,44 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\api-authorization\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\api-authorization\**" />
+    <EmbeddedResource Remove="ClientApp\src\api-authorization\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\api-authorization\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\api-authorization\api-authorization.constants.ts" />
+    <None Remove="ClientApp\src\api-authorization\api-authorization.module.spec.ts" />
+    <None Remove="ClientApp\src\api-authorization\api-authorization.module.ts" />
+    <None Remove="ClientApp\src\api-authorization\authorize.guard.spec.ts" />
+    <None Remove="ClientApp\src\api-authorization\authorize.guard.ts" />
+    <None Remove="ClientApp\src\api-authorization\authorize.interceptor.spec.ts" />
+    <None Remove="ClientApp\src\api-authorization\authorize.interceptor.ts" />
+    <None Remove="ClientApp\src\api-authorization\authorize.service.spec.ts" />
+    <None Remove="ClientApp\src\api-authorization\authorize.service.ts" />
+    <None Remove="ClientApp\src\api-authorization\login-menu\login-menu.component.css" />
+    <None Remove="ClientApp\src\api-authorization\login-menu\login-menu.component.html" />
+    <None Remove="ClientApp\src\api-authorization\login-menu\login-menu.component.spec.ts" />
+    <None Remove="ClientApp\src\api-authorization\login-menu\login-menu.component.ts" />
+    <None Remove="ClientApp\src\api-authorization\login\login.component.css" />
+    <None Remove="ClientApp\src\api-authorization\login\login.component.html" />
+    <None Remove="ClientApp\src\api-authorization\login\login.component.spec.ts" />
+    <None Remove="ClientApp\src\api-authorization\login\login.component.ts" />
+    <None Remove="ClientApp\src\api-authorization\logout\logout.component.css" />
+    <None Remove="ClientApp\src\api-authorization\logout\logout.component.html" />
+    <None Remove="ClientApp\src\api-authorization\logout\logout.component.spec.ts" />
+    <None Remove="ClientApp\src\api-authorization\logout\logout.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Validator\InvestigationValidator.cs" />
+    <None Include="Validator\InvestigationWIthDoctorsValidator.cs" />
+    <None Include="Validator\ScheduledInvestigationValidator.cs" />
+    <None Include="Validator\DoctorValidator.cs" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

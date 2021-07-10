@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-sm-2">
+    <app-sidebar-nav-menu></app-sidebar-nav-menu>
+  </div>
+
+  <div class="col-sm-10">
+    <h1 id="tableLabel">Investigations</h1>
+
+    <p *ngIf="!investigations"><em>Loading...</em></p>
+    <br>
+
+    <a class="btn btn-light" (click)="addInvestigation()">
+      Create investigation
+    </a>
+    <br>
+    <br>
+    <table class='table table-hover' aria-labelledby="tableLabel" *ngIf="investigations">
+      <thead>
+        <tr>
+          <th>Name</th>
+<!--          <th>Type</th>-->
+          <th>Risk Level</th>
+          <th>Description</th>
+<!--          <th>Picture</th>-->
+         <!-- <th>Primary Colour</th>
+          <th>Secondary Colour</th>-->
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let investigation of investigations">
+          <td>{{ investigation.name }}</td>
+          <!--          <td>{{ investigation.type }}</td>-->
+          <td>{{ investigation.riskLevel }}</td>
+          <td>{{ investigation.description }}</td>
+          <!--          <td>{{ investigation.investigationPicture }}</td>-->
+        <!--  <td>
+            <div class="container">
+              <div class="row">
+                <div class="col text-uppercase">{{ activity.primaryColour }}</div>
+                <div class="col"><div class="colored-square" [style.background-color]="getPrimaryColourHex(activity)"></div></div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="container">
+              <div class="row">
+                <div class="col text-uppercase">{{ activity.secondaryColour }}</div>
+                <div class="col"><div class="colored-square" [style.background-color]="getSecondaryColourHex(activity)"></div></div>
+              </div>
+            </div>
+          </td>-->
+          <td>
+            <a class="btn btn-light" (click)="editInvestigation(investigation)" aria-label="Edit" title="Edit">
+              <i class="fa fa-pencil-alt" aria-hidden="true"></i>
+            </a>
+            <a class="btn btn-danger" (click)="deleteInvestigation(investigation)" aria-label="Delete" title="Delete">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<h1 id="tableLabel">Services</h1>
+
+<p *ngIf="!investigations"><em>Loading...</em></p>
+<br>
+<!-- TODO: make this a filter?
+<div id="activity_types" class="text-center" *ngIf="activities">
+  <button *ngFor="let activity of activities" type="button" class="btn btn-danger">{{ activity.name }}</button>
+</div>
+  -->
+
+<!-- TODO: if image cannot be displayed... -->
+
+<div class="card-section-wrapper py-4">
+
+  <div class="card-wrapper">
+    <ng-container *ngIf="investigations">
+      <div *ngFor="let investigation of investigations" class="card-item">
+        <div class="card-item-photo">
+          <img src="/Investigations/Types/{{ investigation.type }}.svg" class="card-img card-img-top" alt="{{ investigation.name }}">
+        </div>
+        <div class="card-item-details">
+          <h4 class="card-item-details-name">{{ investigation.name }}</h4>
+          <div class="card-item-details-description">
+            <p>{{ investigation.description }}</p>
+            <p> Risk: <span *ngFor="let i of [].constructor(investigation.riskLevel)" class="fa fa-star checked"></span></p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

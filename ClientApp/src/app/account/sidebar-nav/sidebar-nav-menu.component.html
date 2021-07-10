@@ -1,0 +1,11 @@
+
+<nav class="nav flex-sm-column">
+  <a class="nav-link" [routerLinkActive]="['link-active']" [routerLink]="['/account']">Manage account details</a>
+  <!--<a class="nav-link" [routerLinkActive]="['link-active']" [routerLink]="['/user-subscriptions']">View your subscriptions</a>-->
+ <!-- <a class="nav-link" [routerLinkActive]="['link-active']" [routerLink]="['/appointmnets-stats']" *ngIf="isAdmin | async">View statistics</a>-->
+  <a class="nav-link" [routerLinkActive]="['link-active']" [routerLink]="['/users']" *ngIf="isAdmin | async">Manage users</a>
+  <a class="nav-link" [routerLinkActive]="['link-active']" [routerLink]="['/create-calendar']" *ngIf="isAdmin | async">Create appointmnets</a>
+  <a class="nav-link" [routerLinkActive]="['link-active']" [routerLink]="['/doctors']" *ngIf="isAdmin | async">Manage doctors</a>
+  <a class="nav-link" [routerLinkActive]="['link-active']" [routerLink]="['/manage-investigations']" *ngIf="isAdmin | async">Manage investigations</a>
+  <!--<a class="nav-link" [routerLinkActive]="['link-active']" [routerLink]="['/manage-subscriptions']" *ngIf="isAdmin | async">Manage subscriptions</a>-->
+</nav>

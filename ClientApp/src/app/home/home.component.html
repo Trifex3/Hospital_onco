@@ -1,4 +1,4 @@
-<h1>Hello, world!</h1>
+<!--<h1>Hello, world!</h1>
 <p>Welcome to your new single-page application, built with:</p>
 <ul>
   <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
@@ -12,3 +12,83 @@
   <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
 </ul>
 <p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+-->
+
+<div class="container-fluid px-0">
+  <div id="carouselControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+      <div class="carousel-item active min-vh-80" [ngStyle]="{'background-image': 'url(https://medicotripindia.com/assets/img/yoga.jpg)'}">
+        <div class="caption d-flex h-100 align-items-center justify-content-center">
+          <h1>CT</h1>
+        </div>
+      </div>
+      <div class="carousel-item min-vh-80" [ngStyle]="{'background-image': 'url(https://www.mensjournal.com/wp-content/uploads/mf/cardio-builds-muscle-main_0.jpg?w=1188&h=675&crop=1&quality=86&strip=all)'}">
+        <div class="caption d-flex h-100 align-items-center justify-content-center">
+          <h1>Appointment</h1>
+        </div>
+      </div>
+      <div class="carousel-item min-vh-80" [ngStyle]="{'background-image': 'url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/tia-1500-1000-22-1580421316.jpg)'}">
+        <div class="caption d-flex h-100 align-items-center justify-content-center">
+          <h1>Biology</h1>
+        </div>
+      </div>
+      <div class="carousel-item min-vh-80" [ngStyle]="{'background-image': 'url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/tia-1500-1000-22-1580421316.jpg)'}">
+        <div class="caption d-flex h-100 align-items-center justify-content-center">
+          <h1>Surgery</h1>
+        </div>
+      </div>
+      <div class="carousel-item min-vh-80" [ngStyle]="{'background-image': 'url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/tia-1500-1000-22-1580421316.jpg)'}">
+        <div class="caption d-flex h-100 align-items-center justify-content-center">
+          <h1>Biopsy</h1>
+        </div>
+      </div>
+      <div class="carousel-item min-vh-80" [ngStyle]="{'background-image': 'url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/tia-1500-1000-22-1580421316.jpg)'}">
+        <div class="caption d-flex h-100 align-items-center justify-content-center">
+          <h1>RTE</h1>
+        </div>
+      </div>
+      <div class="carousel-item min-vh-80" [ngStyle]="{'background-image': 'url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/tia-1500-1000-22-1580421316.jpg)'}">
+        <div class="caption d-flex h-100 align-items-center justify-content-center">
+          <h1>Ultrasound</h1>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+<div class="container py-4 text-center">
+  <h2 class="title">About Us</h2>
+  <p>
+    At our gym, we strive to create a friendly, non-intimidating atmosphere.
+    If you are a beginner, we are here to welcome you with our gym introductory programs that provide the basics of exercise.
+  </p>
+
+  <p>
+    We also offer group classes, which are a great way to add variety to your fitness routine - you never know, you might find something you really enjoy!
+  </p>
+</div>
+
+<div class="card-section-wrapper py-4">
+  <h2 class="title">our instructors</h2>
+
+  <div class="card-wrapper">
+    <ng-container *ngIf="doctors">
+      <div *ngFor="let doctor of doctors" class="card-item">
+        <div class="card-item-photo">
+          <img src="doctor.png" />
+        </div>
+        <div class="card-item-details">
+          <h4 class="card-item-details-name">{{ doctor.firstName }} {{ doctor.lastName.split('')[0] + '.' }}</h4>
+          <p class="card-item-details-description">{{ doctor.description }}</p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

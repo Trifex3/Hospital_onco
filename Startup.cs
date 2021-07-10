@@ -1,5 +1,10 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Hospital_onco.Data;
 using Hospital_onco.Models;
+using Hospital_onco.Services;
+using Hospital_onco.Validator;
+using Hospital_onco.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +16,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Text;
 
 namespace Hospital_onco
 {
@@ -26,6 +34,8 @@ namespace Hospital_onco
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -33,69 +43,94 @@ namespace Hospital_onco
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                    .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders();
 
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+                    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
-            services.AddControllersWithViews();
-            services.AddRazorPages();
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
-        }
+			services.AddAuthentication()
+				 .AddIdentityServerJwt()
+				 .AddJwtBearer(options =>
+				 {
+					 options.SaveToken = true;
+					 options.RequireHttpsMetadata = true;
+					 options.TokenValidationParameters = new TokenValidationParameters()
+					 {
+						 ValidateIssuer = true,
+						 ValidateAudience = true,
+						 ValidAudience = Configuration["Jwt:Site"],
+						 ValidIssuer = Configuration["Jwt:Site"],
+						 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SigningKey"]))
+					 };
+				 });
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseMigrationsEndPoint();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+			services.AddControllersWithViews().AddFluentValidation().AddNewtonsoftJson();
+			services.AddRazorPages();
+			// In production, the Angular files will be served from this directory
+			services.AddSpaStaticFiles(configuration =>
+			{
+				configuration.RootPath = "ClientApp/dist";
+			});
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            if (!env.IsDevelopment())
-            {
-                app.UseSpaStaticFiles();
-            }
 
-            app.UseRouting();
+			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+			services.AddTransient<IValidator<ScheduledInvestigationViewModel>, ScheduledInvestigationValidator>();
+			services.AddTransient<IValidator<InvestigationViewModel>, InvestigationValidator>();
+			services.AddTransient<IValidator<InvestigationWithDoctorsViewModel>, InvestigationWithDoctorsValidator>();
+			services.AddTransient<IValidator<DoctorWithInvestigationsViewModel>, DoctorValidator>();
+			/*services.AddTransient<IValidator<UserSubscriptionViewModel>, UserSubscriptionValidator>();*/
+			services.AddTransient<StatisticsQueryService, StatisticsQueryService>();
+		}
 
-            app.UseAuthentication();
-            app.UseIdentityServer();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-            });
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		{
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+				app.UseMigrationsEndPoint();
+			}
+			else
+			{
+				app.UseExceptionHandler("/Error");
+				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+				app.UseHsts();
+			}
 
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
+			app.UseHttpsRedirection();
+			app.UseStaticFiles();
+			if (!env.IsDevelopment())
+			{
+				app.UseSpaStaticFiles();
+			}
 
-                spa.Options.SourcePath = "ClientApp";
+			app.UseRouting();
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });
-        }
-    }
+			app.UseAuthentication();
+			app.UseIdentityServer();
+			app.UseAuthorization();
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllerRoute(
+						name: "default",
+						pattern: "{controller}/{action=Index}/{id?}");
+				endpoints.MapRazorPages();
+			});
+
+			app.UseSpa(spa =>
+			{
+				// To learn more about options for serving an Angular SPA from ASP.NET Core,
+				// see https://go.microsoft.com/fwlink/?linkid=864501
+
+				spa.Options.SourcePath = "ClientApp";
+
+				if (env.IsDevelopment())
+				{
+					spa.UseAngularCliServer(npmScript: "start");
+				}
+			});
+		}
+	}
 }

@@ -1,6 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+/*a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}*/
+
+@import "~../node_modules/bootstrap/dist/css/bootstrap.min.css"
+
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+/* You can add global styles to this file, and also import other style files */
+/* Provide sufficient contrast against white background */
+
+<app-root >
 a {
   color: #0366d6;
 }
@@ -14,3 +35,166 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/* Card styles */
+
+.home-instructors-wrapper {
+  width: 80%;
+  margin: auto;
+}
+
+.title {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+
+.home-card-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.home-card--item__photo .test-img {
+  width: 100%;
+  height: 280px;
+  background-color: #C0C0C0;
+}
+
+.home-card--item__photo {
+  position: relative;
+}
+
+  .home-card--item__photo img {
+    max-width: 300px;
+  }
+
+.home-card--item__details {
+  padding: 15px;
+}
+
+.home-card--item {
+  overflow: hidden;
+  height: auto;
+  border-radius: 5px;
+  margin: 30px 10px;
+  box-shadow: 0px 0px 6px 1px rgb(190, 189, 189);
+}
+
+  .home-card--item .home-card--item__details {
+    text-align: center;
+  }
+
+.home-card--item__details-description {
+  font-size: 15px;
+  text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden
+}
+
+.home-card--item__details-name:hover {
+  color: #B2675E;
+  transition: all ease 0.5s 0s;
+}
+
+/* Card styles renamed*/
+
+.card-section-wrapper {
+  width: 80%;
+  margin: auto;
+}
+
+.title {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card-item-photo .test-img {
+  width: 100%;
+  height: 280px;
+  background-color: #C0C0C0;
+}
+
+.card-item-photo {
+  position: relative;
+}
+
+  .card-item-photo img {
+    max-width: 300px;
+  }
+
+.card-item-details {
+  padding: 15px;
+}
+
+.card-item {
+  overflow: hidden;
+  height: auto;
+  border-radius: 5px;
+  margin: 30px 10px;
+  box-shadow: 0px 0px 6px 1px rgb(190, 189, 189);
+}
+
+  .card-item .card-item-details {
+    text-align: center;
+  }
+
+.card-item-details-description {
+  font-size: 15px;
+  text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden
+}
+
+.card-item:hover .card-item-details-name {
+  color: #2a5f50;
+  transition: all ease 0.5s 0s;
+}
+
+div.card-item:hover {
+  box-shadow: #2a5f50 0px 2px 8px 0px;
+}
+
+
+.btn-fantastic {
+  width: 50%;
+  border: 2px solid #00c98d;
+}
+
+.form-wrapper {
+  width: 50%;
+}
+
+  .form-wrapper .form-control {
+    border-bottom: 2px solid #00c98d;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Hospital_onco.Data;
 using Hospital_onco.Models;
+using AutoMapper;
+using Hospital_onco.ViewModels;
 
 namespace Hospital_onco.Controllers
 {
@@ -15,17 +17,19 @@ namespace Hospital_onco.Controllers
     public class ScheduledInvestigationController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ScheduledInvestigationController(ApplicationDbContext context)
+        public ScheduledInvestigationController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/ScheduledInvestigation
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ScheduledInvestigation>>> GetScheduledInvestigations()
         {
-            return await _context.ScheduledInvestigations.ToListAsync();
+            return await _context.ScheduledInvestigations.Include(i => i.Investigation).Include(i => i.Doctor).ToListAsync();
         }
 
         // GET: api/ScheduledInvestigation/5
@@ -76,12 +80,19 @@ namespace Hospital_onco.Controllers
         // POST: api/ScheduledInvestigation
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ScheduledInvestigation>> PostScheduledInvestigation(ScheduledInvestigation scheduledInvestigation)
+        public async Task<ActionResult<ScheduledInvestigationViewModel>> PostScheduledInvestigation(ScheduledInvestigationViewModel scheduledInvestigation)
         {
-            _context.ScheduledInvestigations.Add(scheduledInvestigation);
+            var entity = _mapper.Map<ScheduledInvestigation>(scheduledInvestigation);
+            var investigation = _context.Investigations.Find(entity.InvestigationId);
+            var doctor = _context.Doctors.Find(entity.DoctorId);
+            entity.Doctor = doctor;
+            entity.Investigation = investigation;
+
+
+            _context.ScheduledInvestigations.Add(entity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetScheduledInvestigation", new { id = scheduledInvestigation.Id }, scheduledInvestigation);
+            return CreatedAtAction("GetScheduledInvestigation", new { id = entity.Id }, _mapper.Map<ScheduledInvestigationViewModel>(entity));
         }
 
         // DELETE: api/ScheduledInvestigation/5
