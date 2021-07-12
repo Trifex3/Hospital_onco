@@ -28,7 +28,7 @@ export class AdminDoctorUpdateComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    privatedoctorService: DoctorComponentService,
+    private doctorService: DoctorComponentService,
     private route: ActivatedRoute,
     private location: Location,
     private serviceInvestigation: InvestigationComponentService,
@@ -62,8 +62,8 @@ export class AdminDoctorUpdateComponent implements OnInit, OnDestroy {
       FirstName: [null, Validators.required],
       LastName: [null, Validators.required],
       Description: [null, Validators.required],
-      ProfileImage: [null, Validators.required],
-      Investigations: this.fb.array([] , Validators.required)
+      /*ProfileImage: [null, Validators.required],
+      Investigations: this.fb.array([] , Validators.required)*/
     })
   }
 
@@ -128,7 +128,7 @@ export class AdminDoctorUpdateComponent implements OnInit, OnDestroy {
 
   onSubmitForm(): void {
     this.editedDoctor = this.updatedDoctorForm.value;
-    this.editedDoctor.Investigations = this.getUpdatedInvestigationIdsList();
+    this.editedDoctor.AInvestigations = this.getUpdatedInvestigationIdsList();
     this.subscription.add(
       this.doctorService.update(this.existingDoctor.id, this.editedDoctor)
         .subscribe(confirmation => {
@@ -152,9 +152,8 @@ export class AdminDoctorUpdateComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+ ngOnDestroy(): void {
+    
     }
-  }
+  
 }

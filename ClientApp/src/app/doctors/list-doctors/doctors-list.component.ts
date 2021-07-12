@@ -14,8 +14,8 @@ export class AdminDoctorsListComponent implements OnInit, OnDestroy {
 
   @ViewChild('doctorsParent', { static: false }) domDoctorsParent: ElementRef;
   @ViewChildren('doctors') domDoctors: QueryList<any>;
- /* private subscription: Subscription = new Subscription();*/
-  public doctorsList: Doctor.Response[];
+  /* private subscription: Subscription = new Subscription();*/
+
   public doctorsList: Doctor.DoctorResponse[];
 
   message: string;
@@ -32,6 +32,10 @@ export class AdminDoctorsListComponent implements OnInit, OnDestroy {
     this.getDoctors();
   }
 
+  ngOnDestroy(): void {
+
+  }
+
   addDoctor() {
     this.router.navigate(['/doctor/add']);
   }
@@ -43,28 +47,28 @@ export class AdminDoctorsListComponent implements OnInit, OnDestroy {
   getDoctors(): void {
     /*this.subscription.add(*/
     this.doctorsService.getDoctors()
-        .subscribe(
-          result => {
-            this.doctorsList = result;
-            this.errorMessages = [];
-          },
-          error => error.errorMessages = error.error.errors
+      .subscribe(
+        result => {
+          this.doctorsList = result;
+          this.errorMessages = [];
+        },
+        error => error.errorMessages = error.error.errors
       )
     /*);*/
   }
 
   deleteDoctor(doctorId: string): void {
-   /* this.subscription.add(*/
+    /* this.subscription.add(*/
     this.doctorsService.delete(doctorId)
-        .subscribe(
-          deleteConfirmation => {
-            this.removeDoctorFromList(doctorId);
-            this.message = "Success!"
-            this.errorMessages = [];
-          },
-          error => this.errorMessages = error.error.errors
-        )
-   /* );*/
+      .subscribe(
+        deleteConfirmation => {
+          this.removeDoctorFromList(doctorId);
+          this.message = "Success!"
+          this.errorMessages = [];
+        },
+        error => this.errorMessages = error.error.errors
+      )
+    /* );*/
   }
 
   removeDoctorFromList(doctorId): void {
@@ -77,11 +81,8 @@ export class AdminDoctorsListComponent implements OnInit, OnDestroy {
     if (doctorToDelete.length) {
       this.renderer.removeChild(this.domDoctorsParent.nativeElement, doctorToDelete[0].nativeElement);
     }
-  }
 
- /* ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }*/
-  }
 
+    
+  }
+}

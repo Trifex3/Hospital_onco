@@ -22,6 +22,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="bootstrap" Version="5.0.2" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.6" />
@@ -36,11 +37,23 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Compile Remove="ClientApp\src\api-authorization\**" />
+    <Compile Remove="ClientApp\src\app\calendar\**" />
+    <Compile Remove="ClientApp\src\app\counter\**" />
+    <Compile Remove="ClientApp\src\app\fetch-data\**" />
     <Content Remove="$(SpaRoot)**" />
     <Content Remove="ClientApp\src\api-authorization\**" />
+    <Content Remove="ClientApp\src\app\calendar\**" />
+    <Content Remove="ClientApp\src\app\counter\**" />
+    <Content Remove="ClientApp\src\app\fetch-data\**" />
     <EmbeddedResource Remove="ClientApp\src\api-authorization\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\calendar\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\counter\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\fetch-data\**" />
     <None Remove="$(SpaRoot)**" />
     <None Remove="ClientApp\src\api-authorization\**" />
+    <None Remove="ClientApp\src\app\calendar\**" />
+    <None Remove="ClientApp\src\app\counter\**" />
+    <None Remove="ClientApp\src\app\fetch-data\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
@@ -66,6 +79,28 @@
     <None Remove="ClientApp\src\api-authorization\logout\logout.component.html" />
     <None Remove="ClientApp\src\api-authorization\logout\logout.component.spec.ts" />
     <None Remove="ClientApp\src\api-authorization\logout\logout.component.ts" />
+    <None Remove="ClientApp\src\app\calendar\admin\calendar\calendar.component.css" />
+    <None Remove="ClientApp\src\app\calendar\admin\calendar\calendar.component.html" />
+    <None Remove="ClientApp\src\app\calendar\admin\calendar\calendar.component.spec.js" />
+    <None Remove="ClientApp\src\app\calendar\admin\calendar\calendar.component.spec.js.map" />
+    <None Remove="ClientApp\src\app\calendar\admin\calendar\calendar.component.spec.ts" />
+    <None Remove="ClientApp\src\app\calendar\admin\calendar\calendar.component.ts" />
+    <None Remove="ClientApp\src\app\calendar\calendar.component.css" />
+    <None Remove="ClientApp\src\app\calendar\calendar.component.html" />
+    <None Remove="ClientApp\src\app\calendar\calendar.component.spec.js" />
+    <None Remove="ClientApp\src\app\calendar\calendar.component.spec.js.map" />
+    <None Remove="ClientApp\src\app\calendar\calendar.component.spec.ts" />
+    <None Remove="ClientApp\src\app\calendar\calendar.component.ts" />
+    <None Remove="ClientApp\src\app\calendar\shared\appointment.service.ts" />
+    <None Remove="ClientApp\src\app\calendar\shared\calendar.model.js" />
+    <None Remove="ClientApp\src\app\calendar\shared\calendar.model.js.map" />
+    <None Remove="ClientApp\src\app\calendar\shared\calendar.model.ts" />
+    <None Remove="ClientApp\src\app\calendar\shared\calendar.service.ts" />
+    <None Remove="ClientApp\src\app\counter\counter.component.html" />
+    <None Remove="ClientApp\src\app\counter\counter.component.spec.ts" />
+    <None Remove="ClientApp\src\app\counter\counter.component.ts" />
+    <None Remove="ClientApp\src\app\fetch-data\fetch-data.component.html" />
+    <None Remove="ClientApp\src\app\fetch-data\fetch-data.component.ts" />
   </ItemGroup>
 
   <ItemGroup>

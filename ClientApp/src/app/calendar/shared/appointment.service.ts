@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Inject } from '@angular/core';
-import { Appointment } from '../../appointments/shared/appointment.model';
+/*import { Appointment } from '../appointments/shared/appointment.model';*/
+import { Appointment } from '../../appointments/shared/appointments.model'
 
 @Injectable({
   providedIn: 'root'

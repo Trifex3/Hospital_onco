@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ScheduledActivity = void 0;
-var ScheduledActivity = /** @class */ (function () {
-    function ScheduledActivity() {
+exports.ScheduledInvestigation = void 0;
+var ScheduledInvestigation = /** @class */ (function () {
+  function ScheduledInvestigation() {
     }
-    return ScheduledActivity;
+  return ScheduledInvestigation;
 }());
-exports.ScheduledActivity = ScheduledActivity;
+exports.ScheduledInvestigation = ScheduledInvestigation;
 //# sourceMappingURL=calendar.model.js.map

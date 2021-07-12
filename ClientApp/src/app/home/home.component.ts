@@ -9,7 +9,7 @@ export class HomeComponent {
 
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+/*import { Subscription } from 'rxjs';*/
 import { Doctor } from '../doctors/shared/doctor';
 import { DoctorComponentService } from '../doctors/shared/doctor.service';
 
@@ -21,7 +21,7 @@ import { DoctorComponentService } from '../doctors/shared/doctor.service';
 })
 export class HomeComponent implements OnInit {
 
-  private subscription: Subscription = new Subscription();
+  /*private subscription: Subscription = new Subscription();*/
 
   doctors: Doctor.DoctorResponse[] = null;
 
@@ -32,16 +32,14 @@ export class HomeComponent implements OnInit {
   }
 
   getAvailableDoctors(): void {
-    this.subscription.add(
+    /*this.subscription.add(*/
       this.doctorService.getDoctors().subscribe(doctors => {
         this.doctors = doctors;
       })
-    );
+    /*);*/
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    
   }
 }

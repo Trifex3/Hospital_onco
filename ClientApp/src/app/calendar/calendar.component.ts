@@ -18,8 +18,11 @@ import { ScheduledInvestigation } from './shared/calendar.model';
 import { AppointmentComponentService } from './shared/appointment.service';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Appointment } from '../appointments/shared/appointment.model';
+/*import { Appointment } from '../../appointments/shared/appointment.model';*/
+/*import { Appointment } from '../../../../appointments/shared/appointments.model';*/
 import { AuthService } from '../auth/auth.service';
+import { Appointment } from '../appointments/shared/appointments.model';
+
 
 @Component({
   selector: 'app-scheduled-investigations',
@@ -72,7 +75,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     this.isAuthenticated = this.authorizeService.isAuthenticated();
 
-    this.service.getScheduledInvestigation()
+    this.service.getScheduledInvestigations()
       .subscribe(result => {
         for (let item of result) {
           this.events = [
@@ -116,7 +119,7 @@ export class CalendarComponent implements OnInit {
       }, error => error => console.error(error));
   }
 
-  userHasBooking(event: CalendarEvent) {
+  userHasAppointment(event: CalendarEvent) {
     return event.meta.currentAppointment != undefined &&
       event.meta.currentAppointment != null &&
       Object.keys(event.meta.currentAppointment).length > 0;

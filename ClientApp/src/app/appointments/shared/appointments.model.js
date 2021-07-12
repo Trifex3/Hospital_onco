@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Booking = void 0;
-var Booking = /** @class */ (function () {
-    function Booking() {
+exports.Appointment = void 0;
+var Appointment = /** @class */ (function () {
+  function Appointment() {
     }
-    return Booking;
+  return Appointment;
 }());
-exports.Booking = Booking;
+exports.Appointment = Appointment;
 //# sourceMappingURL=booking.model.js.map

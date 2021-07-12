@@ -86,26 +86,25 @@ export class AdminDoctorAddComponent implements OnInit, OnDestroy {
   onSubmitForm(): void {
     this.newDoctor = this.addDoctorForm.value;
     /*this.subscription.add(*/
-      this.doctorService.save(this.newDoctor)
-        .subscribe(confirmation => {
-          this.message = "Success!"
-          this.errorMessages = [];
-          this.initForm();
-          this.router.navigate(['/trainers']);
-        },
-          error => this.errorMessages = error.error.errors
-        )
+    this.doctorService.save(this.newDoctor)
+      .subscribe(confirmation => {
+        this.message = "Success!"
+        this.errorMessages = [];
+        this.initForm();
+        this.router.navigate(['/doctors']);
+      },
+        error => this.errorMessages = error.error.errors
+      )
     /*);*/
   }
-}
 
-  /*ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
- *//* }*//*
+
+ngOnDestroy(): void {
+  
 }
-const checkedResults = Object.keys(this.addDoctorForm.value).filter(prop => {
+  }
+
+/*const checkedResults = Object.keys(this.addDoctorForm.value).filter(prop => {
   if (this.addDoctorForm.value[prop] !== null) {
     return this.addDoctorForm.value[prop]
       }

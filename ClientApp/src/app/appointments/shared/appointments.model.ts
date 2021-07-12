@@ -1,4 +1,4 @@
-export class Apppointment {
+export class Appointment {
   id?: number;
 }
 

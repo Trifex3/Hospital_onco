@@ -21,15 +21,15 @@ namespace Hospital_onco.Validator
             RuleFor(m => m.Description).MinimumLength(10).MaximumLength(150).WithMessage("The description must be between 10 and 150 characters long.");
             RuleFor(m => m.Type).Must(IsAValidInvestigationType);
             RuleFor(m => m.RiskLevel).InclusiveBetween(1, 5).WithMessage("The risk level must be between 1 and 5.");
-            /* RuleFor(m => m.InvestigationPicture).MinimumLength(4).When(m => !string.IsNullOrEmpty(m.InvestigationPicture));
+             /*RuleFor(m => m.InvestigationPicture).MinimumLength(4).When(m => !string.IsNullOrEmpty(m.InvestigationPicture));
              RuleFor(m => m.PrimaryColour).Must(IsAValidHexCode);
              RuleFor(m => m.SecondaryColour).Must(IsAValidHexCode);*/
 
-            /*RuleFor(m => m.Doctors).Custom((prop, validationContext) =>
+           /* RuleFor(m => m.Doctors).Custom((prop, validationContext) =>
             {
                 var instance = validationContext.InstanceToValidate;
 
-                List<int> doctorsToCheck = instance.eDoctors.Select(t => t.Id).ToList();
+                List<int> doctorsToCheck = instance.eDoctors.Select(d => d.Id).ToList();
                 List<int> doctorsForInvestigation = _context.Investigations.Select(a => a.Doctors).Select(t => t.Id).ToArray();     //cum se extrag id-urile Doctor?
                 if (!IsADoctor(doctorsForInvestigation, doctorsToCheck))
                 {
